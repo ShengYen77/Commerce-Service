@@ -76,3 +76,38 @@ spring.jpa.show-sql=true
 | created\_at       | DATETIME | 建立時間        |
 | deleted\_at       | DATETIME | 刪除時間        |
 
+## 設定虛擬資料(透過DBeaver操作)
+
+USE commerce_db;
+
+-- 假資料 Users
+INSERT INTO users
+(first_name, last_name, email, birthday, address, city, state, zipcode, password, role, has_newsletter, last_seen_at, created_at, deleted_at)
+VALUES
+('John', 'Doe', 'john.doe@example.com', '1985-04-12', '123 Main St', 'Taipei', 'Taipei City', '100', 'hashedpassword1', 'customer', 'Y', NOW(), NOW(), NULL),
+('Jane', 'Smith', 'jane.smith@example.com', '1990-07-23', '456 Park Ave', 'Kaohsiung', 'Kaohsiung City', '800', 'hashedpassword2', 'customer', 'N', NOW(), NOW(), NULL),
+('Alice', 'Wang', 'alice.wang@example.com', '1988-11-05', '789 Elm St', 'Taichung', 'Taichung City', '400', 'hashedpassword3', 'admin', 'Y', NOW(), NOW(), NULL),
+('Bob', 'Chen', 'bob.chen@example.com', '1995-02-17', '321 Oak Rd', 'Tainan', 'Tainan City', '700', 'hashedpassword4', 'user', 'N', NOW(), NOW(), NULL),
+('Cathy', 'Lin', 'cathy.lin@example.com', '1992-09-30', '654 Pine St', 'New Taipei', 'New Taipei City', '220', 'hashedpassword5', 'user', 'Y', NOW(), NOW(), NULL);
+
+USE commerce_db;
+
+-- 假資料 Segments
+INSERT INTO segments
+(name, description, created_at, updated_at, deleted_at)
+VALUES
+('VIP', '高價值客戶群', NOW(), NOW(), NULL),
+('Regular', '一般客戶群', NOW(), NOW(), NULL),
+('New', '新加入的客戶', NOW(), NOW(), NULL),
+('Churned', '流失客戶', NOW(), NOW(), NULL),
+('Loyal', '忠實客戶', NOW(), NOW(), NULL);
+
+-- 假資料 User_Segments
+INSERT INTO user_segments
+(user_id, segment_id, created_at, deleted_at)
+VALUES
+(1, 1, NOW(), NULL),  -- John Doe -> VIP
+(2, 2, NOW(), NULL),  -- Jane Smith -> Regular
+(3, 1, NOW(), NULL),  -- Alice Wang -> VIP
+(4, 3, NOW(), NULL),  -- Bob Chen -> New
+(5, 5, NOW(), NULL);  -- Cathy Lin -> Loyal

@@ -19,7 +19,7 @@ public class SpringDocConfig {
                         .description("這是一個基於 Spring Boot + MySQL 的後台管理系統 API 文件")
                         .contact(new Contact()
                                 .name("ShengYen77")
-                                .email("cmypivi@gmail.com")
+                                .email("test@gmail.com")
                                 .url("https://github.com/ShengYen77"))
                         .license(new License()
                                 .name("Apache 2.0")
