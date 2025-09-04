@@ -103,11 +103,11 @@ spring.jpa.show-sql=true
 | updated\_at       | DATETIME | 更新時間        |
 
 ## 設定虛擬資料(透過DBeaver操作)
-
+```
 USE commerce_db;
-
+```
 -- 假資料 Users
-
+```
 INSERT INTO users
 
 (first_name, last_name, email, birthday, address, city, state, zipcode, password, role, has_newsletter, last_seen_at, created_at, deleted_at)
@@ -123,11 +123,9 @@ VALUES
 ('Bob', 'Chen', 'bob.chen@example.com', '1995-02-17', '321 Oak Rd', 'Tainan', 'Tainan City', '700', 'hashedpassword4', 'user', 'N', NOW(), NOW(), NULL),
 
 ('Cathy', 'Lin', 'cathy.lin@example.com', '1992-09-30', '654 Pine St', 'New Taipei', 'New Taipei City', '220', 'hashedpassword5', 'user', 'Y', NOW(), NOW(), NULL);
-
-USE commerce_db;
-
+```
 -- 假資料 Segments
-
+```
 INSERT INTO segments
 
 (name, description, created_at, updated_at, deleted_at)
@@ -143,9 +141,9 @@ VALUES
 ('Churned', '流失客戶', NOW(), NOW(), NULL),
 
 ('Loyal', '忠實客戶', NOW(), NOW(), NULL);
-
+```
 -- 假資料 User_Segments
-
+```
 INSERT INTO user_segments
 
 (user_id, segment_id, created_at, deleted_at)
@@ -161,9 +159,9 @@ VALUES
 (4, 3, NOW(), NULL),  -- Bob Chen -> New
 
 (5, 5, NOW(), NULL);  -- Cathy Lin -> Loyal
-
+```
 -- 假資料 Product_Categories
-
+```
 INSERT INTO product_categories
 
 (category_id, name, description, parent_id, created_at, updated_at, deleted_at)
@@ -189,9 +187,9 @@ VALUES
 (9, 'Networking', 'Routers, modems, network cables', 1, NOW(), NOW(), NULL),
 
 (10, 'Storage Devices', 'SSDs, HDDs, portable drives', 2, NOW(), NOW(), NULL);
-
+```
 -- 假資料 Products
-
+```
 INSERT INTO products
 
 (product_id, name, description, price, stock_quantity, category_id, sku, status, created_at, updated_at, deleted_at)
@@ -217,5 +215,6 @@ VALUES
 (9, 'Tablet S', '10-inch tablet for work and play', 499.99, 75, 3, 'TAB-S-009', 'active', NOW(), NOW(), NULL),
 
 (10, 'Desktop PC Ultra', 'High-end desktop computer', 1799.99, 35, 2, 'DPCU-010', 'active', NOW(), NOW(), NULL);
+```
 
 
