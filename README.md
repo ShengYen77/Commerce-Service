@@ -102,6 +102,26 @@ spring.jpa.show-sql=true
 | deleted\_at       | DATETIME | 刪除時間        |
 | updated\_at       | DATETIME | 更新時間        |
 
+**orders**
+| 欄位名稱              | 型別       | 說明          |
+| ----------------- | -------- | ----------- |
+| order\_id | INT      | 訂單ID (PK)  |
+| user\_id  | INT | 下單的用戶(FK)  |
+| status   | ENUM('pending','paid','shipped','completed','cancelled') | 訂單狀態 |
+| total\_amount | DECIMAL(10,2) | 總金額  |
+| created\_at       | DATETIME | 建立時間        |
+| updated\_at       | DATETIME | 更新時間        |
+
+**order_items**
+| 欄位名稱              | 型別       | 說明          |
+| ----------------- | -------- | ----------- |
+| order\_item\_id | INT      | 明細ID (PK)  |
+| order\_id  | INT | 訂單(FK)  |
+| product\_id   | INT | 產品ID(FK) |
+| total\_price | DECIMAL(10,2) | 總金額  |
+| quantity       | INT | 數量        |
+| unit\_price    | DECIMAL(10,2) | 單價      |
+
 ## 設定虛擬資料(透過DBeaver操作)
 ```
 USE commerce_db;
@@ -215,6 +235,62 @@ VALUES
 (9, 'Tablet S', '10-inch tablet for work and play', 499.99, 75, 3, 'TAB-S-009', 'active', NOW(), NOW(), NULL),
 
 (10, 'Desktop PC Ultra', 'High-end desktop computer', 1799.99, 35, 2, 'DPCU-010', 'active', NOW(), NOW(), NULL);
+```
+-- 假資料 Orders
+```
+INSERT INTO orders (order_id, user_id, status, total_amount, created_at, updated_at)
+
+VALUES
+
+(1, 1, 'paid', 2399.99, NOW(), NOW()),
+
+(2, 2, 'shipped', 1199.98, NOW(), NOW()),
+
+(3, 3, 'completed', 2149.98, NOW(), NOW()),
+
+(4, 4, 'pending', 999.99, NOW(), NOW()),
+
+(5, 5, 'cancelled', 689.97, NOW(), NOW());
+```
+-- 假資料 Order_Items
+```
+INSERT INTO order_items (order_item_id, order_id, product_id, quantity, unit_price)
+
+VALUES
+
+-- Order 1: John Doe
+
+(1, 1, 1, 1, 2399.99), -- Laptop Pro 16
+
+-- Order 2: Jane Smith
+
+(2, 2, 2, 1, 999.99),  -- Smartphone X
+
+(3, 2, 8, 1, 199.99),  -- External SSD 1TB
+
+-- Order 3: Alice Wang
+
+(4, 3, 10, 1, 1799.99), -- Desktop PC Ultra
+
+(5, 3, 4, 1, 349.99),   -- Wireless Headphones
+
+-- Order 4: Bob Chen
+
+(6, 4, 2, 1, 999.99),   -- Smartphone X
+
+-- Order 5: Cathy Lin
+
+(7, 5, 7, 1, 129.99),   -- Router X200
+
+(8, 5, 6, 2, 279.99);   -- Fitness Tracker (2件)
+```
+-- 新增欄位 計算總金額
+```
+UPDATE order_items
+
+SET total_price = unit_price * quantity
+
+WHERE total_price IS NULL OR total_price = 0;
 ```
 
 
