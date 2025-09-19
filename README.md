@@ -122,6 +122,22 @@ spring.jpa.show-sql=true
 | quantity       | INT | 數量        |
 | unit\_price    | DECIMAL(10,2) | 單價      |
 
+**invoices**
+| 欄位名稱              | 型別       | 說明          |
+| ----------------- | -------- | ----------- |
+| invoice\_id | INT      | 發票ID (PK)  |
+| order\_id  | INT | 對應的訂單(FK)  |
+| invoice\_number  | VARCHAR(50) | 發票號碼 |
+| amount | DECIMAL(10,2) | 商品金額(不含稅、運費)|
+| delivery\_fee  | DECIMAL(10,2) | 運費      |
+| tax\_rate    | DECIMAL(5,2) | 稅率，例如5%或0.05(可存成小數或百分比) |
+| tax\_amount    | DECIMAL(10,2) | 稅額 = amount * tax_rate |
+| total\_amount    | DECIMAL(10,2) | 總金額 = amount + delivery_fee + tax_amount |
+| issued\_date       | DATETIME | 開立時間        |
+| status       | VARCHAR(20) | 發票狀態，例如'issued', 'paid', 'cancelled'    |
+| created\_at       | DATETIME | 建立時間        |
+| updated\_at       | DATETIME | 更新時間        |
+
 ## 設定虛擬資料(透過DBeaver操作)
 ```
 USE commerce_db;
@@ -292,5 +308,46 @@ SET total_price = unit_price * quantity
 
 WHERE total_price IS NULL OR total_price = 0;
 ```
+-- 假資料 Invoices
+```
+INSERT INTO invoices
+(order_id, invoice_number, amount, delivery_fee, tax_rate, tax_amount, total_amount, issued_date, status, created_at, updated_at)
+VALUES
+-- John Doe
+(1, 'INV-10001', 2399.99, 50.00, 0.05, 119.99, 2569.98, NOW(), 'issued', NOW(), NOW()),
 
+-- Jane Smith
+(2, 'INV-10002', 1199.98, 30.00, 0.05, 59.99, 1289.97, NOW(), 'issued', NOW(), NOW()),
+
+-- Alice Wang
+(3, 'INV-10003', 2149.98, 40.00, 0.05, 107.50, 2297.48, NOW(), 'issued', NOW(), NOW()),
+
+-- Bob Chen
+(4, 'INV-10004', 999.99, 20.00, 0.05, 50.00, 1069.99, NOW(), 'issued', NOW(), NOW()),
+
+-- Cathy Lin
+(5, 'INV-10005', 689.97, 25.00, 0.05, 34.50, 749.47, NOW(), 'issued', NOW(), NOW()),
+```
+-- 假資料延伸 5 筆額外測試
+```
+(1, 'INV-10006', 2399.99, 50.00, 0.05, 119.99, 2569.98, NOW(), 'paid', NOW(), NOW()),
+(2, 'INV-10007', 1199.98, 30.00, 0.05, 59.99, 1289.97, NOW(), 'paid', NOW(), NOW()),
+(3, 'INV-10008', 2149.98, 40.00, 0.05, 107.50, 2297.48, NOW(), 'paid', NOW(), NOW()),
+(4, 'INV-10009', 999.99, 20.00, 0.05, 50.00, 1069.99, NOW(), 'cancelled', NOW(), NOW()),
+(5, 'INV-10010', 689.97, 25.00, 0.05, 34.50, 749.47, NOW(), 'cancelled', NOW(), NOW());
+```
+-- 清空 invoices 資料表(要小心使用，會刪掉全部資料)
+```
+TRUNCATE TABLE invoices;
+```
+```
+INSERT INTO invoices
+(order_id, invoice_number, amount, delivery_fee, tax_rate, tax_amount, total_amount, issued_date, status, created_at, updated_at)
+VALUES
+(1, 'INV-10001', 2399.99, 50.00, 0.05, 120.00, 2569.99, NOW(), 'issued', NOW(), NOW()),
+(2, 'INV-10002', 1199.98, 30.00, 0.05, 60.00, 1289.98, NOW(), 'issued', NOW(), NOW()),
+(3, 'INV-10003', 2149.98, 40.00, 0.05, 107.50, 2297.48, NOW(), 'issued', NOW(), NOW()),
+(4, 'INV-10004', 999.99, 20.00, 0.05, 50.00, 1069.99, NOW(), 'issued', NOW(), NOW()),
+(5, 'INV-10005', 689.97, 25.00, 0.05, 34.50, 749.47, NOW(), 'issued', NOW(), NOW());
+```
 
