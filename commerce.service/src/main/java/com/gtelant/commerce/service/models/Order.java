@@ -16,6 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Order {
 
     @Id
@@ -28,7 +29,7 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = OrderStatusConverter.class)
     @Column(name = "status", nullable = false, columnDefinition = "ENUM('pending','paid','shipped','completed','cancelled')")
     private OrderStatus status = OrderStatus.PENDING;
 
