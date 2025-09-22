@@ -21,6 +21,94 @@
   - 用戶標籤管理
 - **評論模組**
 
+## 專案架構
+```
+Commerce.service/
+├── configs/
+│ └── SecurityConfig.cs
+│ └── SpringDocConfig.cs
+├── controllers/
+│ └── AuthController.cs
+│ └── InvoiceController.cs
+│ └── OrderController.cs
+│ └── ProductCategoryController.cs
+│ └── ProductController.cs
+│ └── ReviewController.cs
+│ └── UserController.cs
+├── dtos/
+│ └── InvoiceRequest.cs
+│ └── InvoiceResponse.cs
+│ └── InvoiceStatusResponse.cs
+│ └── LoginRequest.cs
+│ └── LoginResponse.cs
+│ └── OrderItemRequest.cs
+│ └── OrderItemResponse.cs
+│ └── OrderRequest.cs
+│ └── OrderResponse.cs
+│ └── OrderStatusResponse.cs
+│ └── ProductCategoryRequest.cs
+│ └── ProductCategoryResponse.cs
+│ └── ProductRequest.cs
+│ └── ProductResponse.cs
+│ └── ReviewRequest.cs
+│ └── ReviewResponse.cs
+│ └── UserRequest.cs
+│ └── UserResponse.cs
+│ └── UserSegmentResponse.cs
+├── mappers/
+│ └── InvoiceMapper.cs
+│ └── OrderItemMapper.cs
+│ └── OrderMapper.cs
+│ └── OrderStatusMapper.cs
+│ └── ProductCategoryMapper.cs
+│ └── ProductMapper.cs
+│ └── ReviewMapper.cs
+│ └── UserMapper.cs
+├── models/
+│ └── Invoice.cs
+│ └── Order.cs
+│ └── OrderItem.cs
+│ └── OrderStatus.cs
+│ └── OrderStatusConverter.cs
+│ └── Product.cs
+│ └── ProductCategory.cs
+│ └── ProductStatus.cs
+│ └── Review.cs
+│ └── ReviewStatus.cs
+│ └── ReviewStatusConverter.cs
+│ └── Segment.cs
+│ └── User.cs
+│ └── UserSegment.cs
+├── repositories/
+│ └── InvoiceRepository.cs
+│ └── OrderItemRepository.cs
+│ └── OrderRepository.cs
+│ └── ProductCategoryRepository.cs
+│ └── ProductRepository.cs
+│ └── ReviewRepository.cs
+│ └── UserRepository.cs
+├── security/
+│ └── JwtAuthenticationFilter.cs
+│ └── JwtUtil.cs
+├── services/
+│ └── impl/
+│ │ └── ReviewServiceImpl.cs
+│ │ └── UserServiceImpl.cs
+│ └── InvoiceService.cs
+│ └── OrderItemService.cs
+│ └── OrderService.cs
+│ └── ProductCategoryService.cs
+│ └── ProductService.cs
+│ └── ReviewService.cs
+│ └── UserService.cs
+├── CommerceServiceApplication
+├── .gitattributes
+├── .gitgnore
+├── HELP.md
+├── pom.xml
+└── README.md
+```
+
 ## 專案初始化
 
 ### 預先於本地建立資料庫
@@ -391,3 +479,4 @@ VALUES
 -- Cathy Lin 對 Fitness Tracker 評論
 (6, 5, 5, '功能齊全，睡眠監測很準確，價格實惠！', 'VISIBLE', NOW());
 ```
+
