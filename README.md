@@ -138,6 +138,18 @@ spring.jpa.show-sql=true
 | created\_at       | DATETIME | 建立時間        |
 | updated\_at       | DATETIME | 更新時間        |
 
+**reviews**
+| 欄位名稱              | 型別       | 說明          |
+| ----------------- | -------- | ----------- |
+| review\_id | INT      | 評論ID (PK)  |
+| product\_id  | INT | 產品ID(FK)  |
+| user\_id  | INT | 評論者(FK) |
+| rating       | INT | 評分(1-5)        |
+| comment       | TEXT | 評論內容        |
+| created\_at       | DATETIME | 建立時間        |
+| updated\_at       | DATETIME | 更新時間        |
+| status       | VARCHAR(20) | 評論狀態(NUM('visible','hidden','deleted') |
+
 ## 設定虛擬資料(透過DBeaver操作)
 ```
 USE commerce_db;
@@ -350,4 +362,32 @@ VALUES
 (4, 'INV-10004', 999.99, 20.00, 0.05, 50.00, 1069.99, NOW(), 'issued', NOW(), NOW()),
 (5, 'INV-10005', 689.97, 25.00, 0.05, 34.50, 749.47, NOW(), 'issued', NOW(), NOW());
 ```
+-- 假資料 Reviews
+```
+INSERT INTO reviews
+(product_id, user_id, rating, comment, status, created_at)
+VALUES
+-- John Doe 對 Laptop Pro 16 評論
+(1, 1, 5, '這台筆電效能超強，螢幕非常漂亮，值得推薦！', 'VISIBLE', NOW()),
 
+-- Jane Smith 對 Smartphone X 評論
+(2, 2, 4, '手機很順暢，但電池續航略短。', 'VISIBLE', NOW()),
+
+-- Alice Wang 對 Desktop PC Ultra 評論
+(10, 3, 5, '桌機超安靜又快速，處理大量影像沒問題。', 'VISIBLE', NOW()),
+
+-- Bob Chen 對 Smartphone X 評論
+(2, 4, 3, '整體還行，但價格稍高，CP值普通。', 'VISIBLE', NOW()),
+
+-- Cathy Lin 對 Router X200 評論
+(7, 5, 4, '訊號很穩定，安裝也簡單，CP值高。', 'VISIBLE', NOW()),
+
+-- John Doe 額外評論 Wireless Headphones
+(4, 1, 5, '降噪效果很好，音質非常出色！', 'VISIBLE', NOW()),
+
+-- Jane Smith 額外評論 External SSD 1TB
+(8, 2, 4, '傳輸速度快，但外殼稍微容易刮傷。', 'VISIBLE', NOW()),
+
+-- Cathy Lin 對 Fitness Tracker 評論
+(6, 5, 5, '功能齊全，睡眠監測很準確，價格實惠！', 'VISIBLE', NOW());
+```
