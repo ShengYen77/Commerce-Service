@@ -16,27 +16,21 @@ public class ProductCategoryController {
 
     private final ProductCategoryService categoryService;
 
-    // -------------------------------
     // 建立產品類別
-    // -------------------------------
     @PostMapping
     public ResponseEntity<ProductCategoryResponse> createCategory(@RequestBody ProductCategoryRequest request) {
         ProductCategoryResponse response = categoryService.createCategory(request);
         return ResponseEntity.ok(response);
     }
 
-    // -------------------------------
-    // 查詢所有產品類別（過濾已刪除）
-    // -------------------------------
+    // 查詢所有產品類別(過濾已刪除)
     @GetMapping
     public ResponseEntity<List<ProductCategoryResponse>> getAllCategories() {
         List<ProductCategoryResponse> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
 
-    // -------------------------------
-    // 查詢單一產品類別（過濾已刪除）
-    // -------------------------------
+    // 查詢單一產品類別(過濾已刪除)
     @GetMapping("/{id}")
     public ResponseEntity<ProductCategoryResponse> getCategoryById(@PathVariable Integer id) {
         try {
@@ -47,9 +41,7 @@ public class ProductCategoryController {
         }
     }
 
-    // -------------------------------
-    // 更新產品類別（過濾已刪除）
-    // -------------------------------
+    // 更新產品類別(過濾已刪除)
     @PutMapping("/{id}")
     public ResponseEntity<ProductCategoryResponse> updateCategory(
             @PathVariable Integer id,
@@ -62,9 +54,7 @@ public class ProductCategoryController {
         }
     }
 
-    // -------------------------------
-    // 刪除產品類別（軟刪除）
-    // -------------------------------
+    // 刪除產品類別(軟刪除)
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
         try {
@@ -75,4 +65,3 @@ public class ProductCategoryController {
         }
     }
 }
-

@@ -24,7 +24,6 @@ public class Order {
     @Column(name = "order_id")
     private Integer id;
 
-    // 關聯到 User
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -44,7 +43,6 @@ public class Order {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // 一個訂單包含多個明細
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 }

@@ -9,12 +9,7 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
-    // 根據用戶查詢訂單
     List<Order> findByUserId(Integer userId);
-
-    // 根據狀態查詢訂單
     List<Order> findByStatus(OrderStatus status);
-
-    // 根據用戶 + 狀態查詢
     List<Order> findByUserIdAndStatus(Integer userId, OrderStatus status);
 }

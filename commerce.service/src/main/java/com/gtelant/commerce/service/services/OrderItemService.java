@@ -41,12 +41,10 @@ public class OrderItemService {
         item.setProduct(product);
         item.setQuantity(quantity);
 
-        // 計算 unitPrice 與 totalPrice
         BigDecimal unitPrice = product.getPrice();
         item.setUnitPrice(unitPrice);
         item.setTotalPrice(unitPrice.multiply(BigDecimal.valueOf(quantity)));
 
-        // 儲存後更新訂單總金額
         OrderItem savedItem = orderItemRepository.save(item);
         order.setTotalAmount(order.getOrderItems().stream()
                 .map(OrderItem::getTotalPrice)
@@ -55,8 +53,6 @@ public class OrderItemService {
 
         return savedItem;
     }
-
-
 
     @Transactional
     public void removeItem(Integer orderItemId) {

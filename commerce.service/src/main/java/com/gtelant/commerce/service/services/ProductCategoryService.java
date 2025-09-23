@@ -23,7 +23,6 @@ public class ProductCategoryService {
         this.categoryMapper = categoryMapper;
     }
 
-    // 建立產品類別
     public ProductCategoryResponse createCategory(ProductCategoryRequest request) {
         ProductCategory category = categoryMapper.toEntity(request);
         category.setCreatedAt(LocalDateTime.now());
@@ -31,7 +30,6 @@ public class ProductCategoryService {
         return categoryMapper.toResponse(saved);
     }
 
-    // 查詢所有未刪除產品類別
     public List<ProductCategoryResponse> getAllCategories() {
         return categoryRepository.findAll()
                 .stream()
@@ -40,7 +38,6 @@ public class ProductCategoryService {
                 .collect(Collectors.toList());
     }
 
-    // 依 ID 查詢單一未刪除產品類別
     public ProductCategoryResponse getCategoryById(Integer id) {
         return categoryRepository.findById(id)
                 .filter(c -> c.getDeletedAt() == null)
@@ -48,7 +45,6 @@ public class ProductCategoryService {
                 .orElseThrow(() -> new RuntimeException("Category not found"));
     }
 
-    // 更新產品類別
     public ProductCategoryResponse updateCategory(Integer id, ProductCategoryRequest request) {
         ProductCategory category = categoryRepository.findById(id)
                 .filter(c -> c.getDeletedAt() == null)
@@ -62,7 +58,6 @@ public class ProductCategoryService {
         return categoryMapper.toResponse(updated);
     }
 
-    // 軟刪除產品類別
     public void deleteCategory(Integer id) {
         ProductCategory category = categoryRepository.findById(id)
                 .filter(c -> c.getDeletedAt() == null)

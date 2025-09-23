@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 public class ReviewResponse {
     private Integer reviewId;
     private Integer productId;
-    private String productName;   // 額外帶出
+    private String productName;
     private Integer userId;
-    private String userName;      // 額外帶出
+    private String userName;
     private int rating;
     private String comment;
     private ReviewStatus status;

@@ -14,4 +14,3 @@ public class ReviewStatusConverter implements AttributeConverter<ReviewStatus, S
         return dbData == null ? null : ReviewStatus.valueOf(dbData.toUpperCase());
     }
 }
-

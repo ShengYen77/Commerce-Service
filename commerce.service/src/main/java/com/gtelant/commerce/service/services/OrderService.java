@@ -31,11 +31,9 @@ public class OrderService {
 
     @Transactional
     public Order createOrder(Order order) {
-        // 確保使用者存在
         userRepository.findById(order.getUser().getId())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        // 設定單價與 totalPrice
         for (OrderItem item : order.getOrderItems()) {
             Product product = productRepository.findById(item.getProduct().getId())
                     .orElseThrow(() -> new EntityNotFoundException("Product not found: " + item.getProduct().getId()));
@@ -44,7 +42,6 @@ public class OrderService {
             item.setTotalPrice(product.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
         }
 
-        // 計算整個訂單總金額
         order.setTotalAmount(order.getOrderItems().stream()
                 .map(OrderItem::getTotalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add));

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReviewMapper {
 
-    // DTO → Entity (instance method)
+    // DTO → Entity
     public Review toEntity(ReviewRequest request, User user, Product product) {
         Review review = new Review();
         review.setUser(user);
@@ -22,7 +22,7 @@ public class ReviewMapper {
         return review;
     }
 
-    // Entity → DTO (instance method)
+    // Entity → DTO
     public ReviewResponse toResponse(Review review) {
         ReviewResponse response = new ReviewResponse();
         response.setReviewId(review.getId());

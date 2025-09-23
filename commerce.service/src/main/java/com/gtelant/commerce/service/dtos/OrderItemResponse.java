@@ -10,6 +10,6 @@ public class OrderItemResponse {
     private Integer productId;
     private String productName;
     private Integer quantity;
-    private BigDecimal unitPrice;   // 單價
-    private BigDecimal totalPrice;  // 總價 (unitPrice * quantity)
+    private BigDecimal unitPrice;
+    private BigDecimal totalPrice;
 }

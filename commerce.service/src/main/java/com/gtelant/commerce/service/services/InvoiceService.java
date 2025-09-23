@@ -20,7 +20,6 @@ public class InvoiceService {
     @Autowired
     private InvoiceMapper invoiceMapper;
 
-    // 取得所有發票
     public List<InvoiceResponse> getAllInvoices() {
         return invoiceRepository.findAll()
                 .stream()

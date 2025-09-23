@@ -19,7 +19,6 @@ public class CommerceServiceApplication {
 		SpringApplication.run(CommerceServiceApplication.class, args);
 	}
 
-	// 啟動時自動檢查資料庫連線
 	@Bean
 	public CommandLineRunner checkDatabaseConnection(DataSource dataSource) {
 		return args -> {

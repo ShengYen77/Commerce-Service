@@ -11,5 +11,5 @@ public class ProductResponse {
     private BigDecimal price;
     private Integer stockQuantity;
     private Integer categoryId;
-    private String categoryName; // 額外帶出，方便前端顯示
+    private String categoryName;
 }

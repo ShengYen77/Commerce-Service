@@ -16,27 +16,18 @@ public class ProductController {
 
     private final ProductService productService;
 
-    // -------------------------------
-    // 建立產品
-    // -------------------------------
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest request) {
         ProductResponse response = productService.createProduct(request);
         return ResponseEntity.ok(response);
     }
 
-    // -------------------------------
-    // 查詢所有產品（過濾已刪除）
-    // -------------------------------
     @GetMapping
     public ResponseEntity<List<ProductResponse>> getAllProducts() {
         List<ProductResponse> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
-    // -------------------------------
-    // 查詢單一產品（過濾已刪除）
-    // -------------------------------
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable Integer id) {
         try {
@@ -47,9 +38,6 @@ public class ProductController {
         }
     }
 
-    // -------------------------------
-    // 更新產品（過濾已刪除）
-    // -------------------------------
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponse> updateProduct(
             @PathVariable Integer id,
@@ -62,9 +50,6 @@ public class ProductController {
         }
     }
 
-    // -------------------------------
-    // 刪除產品（軟刪除）
-    // -------------------------------
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
         try {

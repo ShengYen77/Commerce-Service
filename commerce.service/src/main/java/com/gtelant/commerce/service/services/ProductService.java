@@ -28,7 +28,6 @@ public class ProductService {
         this.productMapper = productMapper;
     }
 
-    // 建立產品
     public ProductResponse createProduct(ProductRequest request) {
         ProductCategory category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -40,7 +39,6 @@ public class ProductService {
         return productMapper.toResponse(saved);
     }
 
-    // 查詢所有未刪除產品
     public List<ProductResponse> getAllProducts() {
         return productRepository.findAll()
                 .stream()
@@ -49,7 +47,6 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    // 依 ID 查詢單一未刪除產品
     public ProductResponse getProductById(Integer id) {
         return productRepository.findById(id)
                 .filter(p -> p.getDeletedAt() == null)
@@ -57,7 +54,6 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
-    // 更新產品
     public ProductResponse updateProduct(Integer id, ProductRequest request) {
         Product product = productRepository.findById(id)
                 .filter(p -> p.getDeletedAt() == null)
@@ -66,7 +62,6 @@ public class ProductService {
         ProductCategory category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        // 更新欄位
         product.setName(request.getName());
         product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
@@ -78,7 +73,6 @@ public class ProductService {
         return productMapper.toResponse(updated);
     }
 
-    // 軟刪除產品
     public void deleteProduct(Integer id) {
         Product product = productRepository.findById(id)
                 .filter(p -> p.getDeletedAt() == null)
